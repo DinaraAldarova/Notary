@@ -161,6 +161,7 @@
             // 
             // buttonClientEdit
             // 
+            this.buttonClientEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonClientEdit.Location = new System.Drawing.Point(607, 143);
             this.buttonClientEdit.Name = "buttonClientEdit";
             this.buttonClientEdit.Size = new System.Drawing.Size(92, 23);
@@ -170,6 +171,7 @@
             // 
             // buttonClientDelete
             // 
+            this.buttonClientDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonClientDelete.Location = new System.Drawing.Point(705, 143);
             this.buttonClientDelete.Name = "buttonClientDelete";
             this.buttonClientDelete.Size = new System.Drawing.Size(75, 23);
@@ -277,6 +279,7 @@
             // 
             // buttonDealEdit
             // 
+            this.buttonDealEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonDealEdit.Location = new System.Drawing.Point(607, 143);
             this.buttonDealEdit.Name = "buttonDealEdit";
             this.buttonDealEdit.Size = new System.Drawing.Size(92, 23);
@@ -286,6 +289,7 @@
             // 
             // buttonDealDelete
             // 
+            this.buttonDealDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonDealDelete.Location = new System.Drawing.Point(705, 143);
             this.buttonDealDelete.Name = "buttonDealDelete";
             this.buttonDealDelete.Size = new System.Drawing.Size(75, 23);
@@ -337,10 +341,15 @@
             // 
             // dataGridViewDeal
             // 
+            this.dataGridViewDeal.AllowUserToAddRows = false;
+            this.dataGridViewDeal.AllowUserToDeleteRows = false;
             this.dataGridViewDeal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDeal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewDeal.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewDeal.MultiSelect = false;
             this.dataGridViewDeal.Name = "dataGridViewDeal";
+            this.dataGridViewDeal.ReadOnly = true;
+            this.dataGridViewDeal.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewDeal.Size = new System.Drawing.Size(786, 183);
             this.dataGridViewDeal.TabIndex = 1;
             // 
@@ -388,6 +397,7 @@
             // 
             // buttonServiceEdit
             // 
+            this.buttonServiceEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonServiceEdit.Location = new System.Drawing.Point(607, 143);
             this.buttonServiceEdit.Name = "buttonServiceEdit";
             this.buttonServiceEdit.Size = new System.Drawing.Size(92, 23);
@@ -397,6 +407,7 @@
             // 
             // buttonServiceDelete
             // 
+            this.buttonServiceDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonServiceDelete.Location = new System.Drawing.Point(705, 143);
             this.buttonServiceDelete.Name = "buttonServiceDelete";
             this.buttonServiceDelete.Size = new System.Drawing.Size(75, 23);
@@ -448,10 +459,15 @@
             // 
             // dataGridViewService
             // 
+            this.dataGridViewService.AllowUserToAddRows = false;
+            this.dataGridViewService.AllowUserToDeleteRows = false;
             this.dataGridViewService.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewService.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewService.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewService.MultiSelect = false;
             this.dataGridViewService.Name = "dataGridViewService";
+            this.dataGridViewService.ReadOnly = true;
+            this.dataGridViewService.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewService.Size = new System.Drawing.Size(786, 183);
             this.dataGridViewService.TabIndex = 1;
             // 
@@ -499,6 +515,7 @@
             // 
             // buttonDiscontEdit
             // 
+            this.buttonDiscontEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonDiscontEdit.Location = new System.Drawing.Point(607, 143);
             this.buttonDiscontEdit.Name = "buttonDiscontEdit";
             this.buttonDiscontEdit.Size = new System.Drawing.Size(92, 23);
@@ -508,6 +525,7 @@
             // 
             // buttonDiscontDelete
             // 
+            this.buttonDiscontDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonDiscontDelete.Location = new System.Drawing.Point(705, 143);
             this.buttonDiscontDelete.Name = "buttonDiscontDelete";
             this.buttonDiscontDelete.Size = new System.Drawing.Size(75, 23);
@@ -559,10 +577,15 @@
             // 
             // dataGridViewDiscont
             // 
+            this.dataGridViewDiscont.AllowUserToAddRows = false;
+            this.dataGridViewDiscont.AllowUserToDeleteRows = false;
             this.dataGridViewDiscont.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDiscont.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewDiscont.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewDiscont.MultiSelect = false;
             this.dataGridViewDiscont.Name = "dataGridViewDiscont";
+            this.dataGridViewDiscont.ReadOnly = true;
+            this.dataGridViewDiscont.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewDiscont.Size = new System.Drawing.Size(786, 183);
             this.dataGridViewDiscont.TabIndex = 1;
             // 

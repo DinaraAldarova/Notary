@@ -8,6 +8,7 @@ namespace Нотариус
 	{
 		public int id;
 		public int idClient;
+		//посчитать сумму и комиссионные
 		public double Total;
 		public double Commission;
 		public string Description;
@@ -24,6 +25,8 @@ namespace Нотариус
 			Total = 0;
 			Commission = 0;
 			Description = "";
+			idServices = new List<int>();
+			idDisconts = new List<int>();
 		}
 
 		public Deal(int id, int IdClient)
@@ -33,6 +36,8 @@ namespace Нотариус
 			Total = 0;
 			Commission = 0;
 			Description = "";
+			idServices = new List<int>();
+			idDisconts = new List<int>();
 		}
 
 		public Deal(int IdClient)
@@ -42,6 +47,8 @@ namespace Нотариус
 			Total = 0;
 			Commission = 0;
 			Description = "";
+			idServices = new List<int>();
+			idDisconts = new List<int>();
 		}
 
 		public Deal(DbDataRecord record)
@@ -52,8 +59,8 @@ namespace Нотариус
 			Commission = Convert.ToDouble(record["Commission"].ToString());
 			Description = record["Description"].ToString();
 
-			this.idServices = idServices;
-			this.idDisconts = idDisconts;
+			idServices = new List<int>();
+			idDisconts = new List<int>();
 		}
 
 		public string SQLInsertOrUpdate()

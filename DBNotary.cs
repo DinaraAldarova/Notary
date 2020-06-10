@@ -138,6 +138,21 @@ namespace Нотариус
 			return result;
 		}
 
+		public List<int> getDealId()
+		{
+			connection.Open();
+			SQLiteCommand command = new SQLiteCommand(Deal.SQLSelectId(), connection);
+			SQLiteDataReader reader = command.ExecuteReader();
+			List<int> list = new List<int>();
+
+			foreach (DbDataRecord record in reader)
+			{
+				list.Add(Convert.ToInt32(record["id"].ToString()));
+			}
+			connection.Close();
+			return list;
+		}
+
 		public Deal getDeal(int id)
 		{
 			connection.Open();
@@ -162,7 +177,7 @@ namespace Нотариус
 			reader = command.ExecuteReader();
 			foreach (DbDataRecord record in reader)
 			{
-				deal.idDisconts.Add(Convert.ToInt32(record["idDisconts"].ToString()));
+				deal.idDisconts.Add(Convert.ToInt32(record["idDiscont"].ToString()));
 			}
 
 			connection.Close();
@@ -209,6 +224,21 @@ namespace Нотариус
 			return result;
 		}
 
+		public List<int> getDiscontId()
+		{
+			connection.Open();
+			SQLiteCommand command = new SQLiteCommand(Discont.SQLSelectId(), connection);
+			SQLiteDataReader reader = command.ExecuteReader();
+			List<int> list = new List<int>();
+
+			foreach (DbDataRecord record in reader)
+			{
+				list.Add(Convert.ToInt32(record["id"].ToString()));
+			}
+			connection.Close();
+			return list;
+		}
+
 		public Discont getDiscont(int id)
 		{
 			connection.Open();
@@ -245,6 +275,21 @@ namespace Нотариус
 
 			connection.Close();
 			return result;
+		}
+
+		public List<int> getServiceId()
+		{
+			connection.Open();
+			SQLiteCommand command = new SQLiteCommand(Service.SQLSelectId(), connection);
+			SQLiteDataReader reader = command.ExecuteReader();
+			List<int> list = new List<int>();
+
+			foreach (DbDataRecord record in reader)
+			{
+				list.Add(Convert.ToInt32(record["id"].ToString()));
+			}
+			connection.Close();
+			return list;
 		}
 
 		public Service getService(int id)

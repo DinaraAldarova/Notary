@@ -43,8 +43,8 @@ namespace Нотариус
 			id = Convert.ToInt32(record["id"].ToString());
 			Name = record["Name"].ToString();
 			Description = record["Description"].ToString();
-			Percent = Convert.ToDouble(record["Percent"].ToString());
-			Value = Convert.ToDouble(record["Value"].ToString());
+			Percent = string.IsNullOrEmpty(record["Percent"].ToString()) ? 0 : Convert.ToDouble(record["Percent"].ToString());
+			Value = string.IsNullOrEmpty(record["Value"].ToString()) ? 0 : Convert.ToDouble(record["Value"].ToString());
 		}
 
 		public string SQLInsertOrUpdate()
