@@ -110,7 +110,7 @@ namespace Нотариус
                 string idServices = "";
                 foreach (int idService in deal.idServices)
                 {
-                    idServices += idService + ", ";
+                    idServices += ", " + idService;
                 }
                 if (!string.IsNullOrEmpty(idServices))
                     idServices = idServices.Substring(2);
@@ -118,7 +118,7 @@ namespace Нотариус
                 string idDisconts = "";
                 foreach (int idDiscont in deal.idDisconts)
                 {
-                    idDisconts += idDiscont + ", ";
+                    idDisconts += ", " + idDiscont;
                 }
                 if (!string.IsNullOrEmpty(idDisconts))
                     idDisconts = idDisconts.Substring(2);
