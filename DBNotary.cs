@@ -85,7 +85,8 @@ namespace Нотариус
 			connection.Close();
 		}
 
-		public List<int> getClientId()
+        #region Client
+        public List<int> getClientId()
 		{
 			connection.Open();
 			SQLiteCommand command = new SQLiteCommand(Client.SQLSelectId(), connection);
@@ -137,8 +138,10 @@ namespace Нотариус
 			connection.Close();
 			return result;
 		}
+        #endregion
 
-		public List<int> getDealId()
+        #region Deal
+        public List<int> getDealId()
 		{
 			connection.Open();
 			SQLiteCommand command = new SQLiteCommand(Deal.SQLSelectId(), connection);
@@ -223,60 +226,9 @@ namespace Нотариус
 			connection.Close();
 			return result;
 		}
+		#endregion
 
-		public List<int> getDiscontId()
-		{
-			connection.Open();
-			SQLiteCommand command = new SQLiteCommand(Discont.SQLSelectId(), connection);
-			SQLiteDataReader reader = command.ExecuteReader();
-			List<int> list = new List<int>();
-
-			foreach (DbDataRecord record in reader)
-			{
-				list.Add(Convert.ToInt32(record["id"].ToString()));
-			}
-			connection.Close();
-			return list;
-		}
-
-		public Discont getDiscont(int id)
-		{
-			connection.Open();
-			SQLiteCommand command = new SQLiteCommand(Discont.SQLSelect(id), connection);
-			SQLiteDataReader reader = command.ExecuteReader();
-			Discont discont = new Discont();
-			foreach (DbDataRecord record in reader)
-			{
-				//объект на самом деле только один, потому что ищется по первичному ключу
-				//но я не нашла синтаксис для взятия этой строки
-				discont = new Discont(record);
-			}
-			connection.Close();
-			return discont;
-		}
-
-		public int setDiscont(Discont discont)
-		{
-			connection.Open();
-
-			SQLiteCommand command = new SQLiteCommand(discont.SQLInsertOrUpdate(), connection);
-			int result = command.ExecuteNonQuery();
-
-			connection.Close();
-			return result;
-		}
-
-		public int deleteDiscont(Discont discont)
-		{
-			connection.Open();
-
-			SQLiteCommand command = new SQLiteCommand(discont.SQLDelete(), connection);
-			int result = command.ExecuteNonQuery();
-
-			connection.Close();
-			return result;
-		}
-
+		#region Service
 		public List<int> getServiceId()
 		{
 			connection.Open();
@@ -329,6 +281,62 @@ namespace Нотариус
 			connection.Close();
 			return result;
 		}
-	}
+		#endregion
+
+		#region Discont
+		public List<int> getDiscontId()
+		{
+			connection.Open();
+			SQLiteCommand command = new SQLiteCommand(Discont.SQLSelectId(), connection);
+			SQLiteDataReader reader = command.ExecuteReader();
+			List<int> list = new List<int>();
+
+			foreach (DbDataRecord record in reader)
+			{
+				list.Add(Convert.ToInt32(record["id"].ToString()));
+			}
+			connection.Close();
+			return list;
+		}
+
+		public Discont getDiscont(int id)
+		{
+			connection.Open();
+			SQLiteCommand command = new SQLiteCommand(Discont.SQLSelect(id), connection);
+			SQLiteDataReader reader = command.ExecuteReader();
+			Discont discont = new Discont();
+			foreach (DbDataRecord record in reader)
+			{
+				//объект на самом деле только один, потому что ищется по первичному ключу
+				//но я не нашла синтаксис для взятия этой строки
+				discont = new Discont(record);
+			}
+			connection.Close();
+			return discont;
+		}
+
+		public int setDiscont(Discont discont)
+		{
+			connection.Open();
+
+			SQLiteCommand command = new SQLiteCommand(discont.SQLInsertOrUpdate(), connection);
+			int result = command.ExecuteNonQuery();
+
+			connection.Close();
+			return result;
+		}
+
+		public int deleteDiscont(Discont discont)
+		{
+			connection.Open();
+
+			SQLiteCommand command = new SQLiteCommand(discont.SQLDelete(), connection);
+			int result = command.ExecuteNonQuery();
+
+			connection.Close();
+			return result;
+		}
+        #endregion
+    }
 }
 

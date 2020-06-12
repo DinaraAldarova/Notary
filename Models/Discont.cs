@@ -20,22 +20,22 @@ namespace Нотариус
 			Value = 0;
 		}
 
-		public Discont(int id, string name)
+		public Discont(int id, string name, string description, double percent, double value)
 		{
 			this.id = id;
 			Name = name;
-			Description = "";
-			Percent = 0;
-			Value = 0;
+			Description = description;
+			Percent = percent;
+			Value = value;
 		}
 
-		public Discont(string name)
+		public Discont(string name, string description, double percent, double value)
 		{
 			id = -1;
 			Name = name;
-			Description = "";
-			Percent = 0;
-			Value = 0;
+			Description = description;
+			Percent = percent;
+			Value = value;
 		}
 
 		public Discont(DbDataRecord record)
@@ -45,6 +45,36 @@ namespace Нотариус
 			Description = record["Description"].ToString();
 			Percent = string.IsNullOrEmpty(record["Percent"].ToString()) ? 0 : Convert.ToDouble(record["Percent"].ToString());
 			Value = string.IsNullOrEmpty(record["Value"].ToString()) ? 0 : Convert.ToDouble(record["Value"].ToString());
+		}
+
+		public static string SQLSelectId()
+		{
+			return string.Format(
+				"SELECT {0} FROM '{1}';",
+				"id",
+				"Disconts"
+				);
+		}
+
+		public static string SQLSelect(int id)
+		{
+			return string.Format(
+				"SELECT {0} FROM '{1}' WHERE {2}={3};",
+				"*",
+				"Disconts",
+				"id",
+				id
+				);
+		}
+
+		public static string SQLDelete(int id)
+		{
+			return string.Format(
+				"DELETE FROM '{0}' WHERE {1}={2};",
+				"Disconts",
+				"id",
+				id
+				);
 		}
 
 		public string SQLInsertOrUpdate()
@@ -91,36 +121,6 @@ namespace Нотариус
 					);
 			}
 			return query;
-		}
-
-		public static string SQLSelect(int id)
-		{
-			return string.Format(
-				"SELECT {0} FROM '{1}' WHERE {2}={3};",
-				"*",
-				"Disconts",
-				"id",
-				id
-				);
-		}
-
-		public static string SQLSelectId()
-		{
-			return string.Format(
-				"SELECT {0} FROM '{1}';",
-				"id",
-				"Disconts"
-				);
-		}
-
-		public static string SQLDelete(int id)
-		{
-			return string.Format(
-				"DELETE FROM '{0}' WHERE {1}={2};",
-				"Disconts",
-				"id",
-				id
-				);
 		}
 
 		public string SQLDelete()

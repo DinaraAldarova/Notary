@@ -20,23 +20,23 @@ namespace Нотариус.Models
             Phone = "";
         }
 
-        public Client(int id, string name)
-        {
-            this.id = id;
-            Name = name;
-            Activity = "";
-            Address = "";
-            Phone = "";
-        }
+		public Client(int id, string name, string activity, string address, string phone)
+		{
+			this.id = id;
+			Name = name;
+			Activity = activity;
+			Address = address;
+			Phone = phone;
+		}
 
-        public Client(string name)
-        {
-            id = -1;
-            Name = name;
-            Activity = "";
-            Address = "";
-            Phone = "";
-        }
+		public Client(string name, string activity, string address, string phone)
+		{
+			id = -1;
+			Name = name;
+			Activity = activity;
+			Address = address;
+			Phone = phone;
+		}
 
 		public Client(DbDataRecord record)
 		{
@@ -47,7 +47,37 @@ namespace Нотариус.Models
 			Phone = record["Phone"].ToString();
 		}
 
-        public string SQLInsertOrUpdate()
+		public static string SQLSelectId()
+		{
+			return string.Format(
+				"SELECT {0} FROM '{1}';",
+				"id",
+				"Clients"
+				);
+		}
+
+		public static string SQLSelect(int id)
+		{
+			return string.Format(
+				"SELECT {0} FROM '{1}' WHERE {2}={3};",
+				"*",
+				"Clients",
+				"id",
+				id
+				);
+		}
+
+		public static string SQLDelete(int id)
+		{
+			return string.Format(
+				"DELETE FROM '{0}' WHERE {1}={2};",
+				"Clients",
+				"id",
+				id
+				);
+		}
+
+		public string SQLInsertOrUpdate()
         {
 			string names = "Name";
 			string values = "'" + Name + "'";
@@ -92,36 +122,6 @@ namespace Нотариус.Models
 					);
 			}
 			return query;
-		}
-
-		public static string SQLSelect(int id)
-		{
-			return string.Format(
-				"SELECT {0} FROM '{1}' WHERE {2}={3};",
-				"*",
-				"Clients",
-				"id",
-				id
-				);
-		}
-
-		public static string SQLSelectId()
-		{
-			return string.Format(
-				"SELECT {0} FROM '{1}';",
-				"id",
-				"Clients"
-				);
-		}
-
-		public static string SQLDelete(int id)
-		{
-			return string.Format(
-				"DELETE FROM '{0}' WHERE {1}={2};",
-				"Clients",
-				"id",
-				id
-				);
 		}
 
 		public string SQLDelete()

@@ -40,7 +40,18 @@ namespace Нотариус
             if (!File.Exists(dB.databaseName))
             {
                 dB.RecreateDB();
+                //dB.setClient(new Client("ПГНИУ"));
+                //dB.setService(new Service("Договор"));
+                //dB.setDiscont(new Discont("Новогодняя"));
+                //dB.setDeal(new Deal(1));
             }
+
+            dB.setDiscont(new Discont("Новогодняя", "Специально к новому году", 10, 0));
+            dB.setService(new Service("Договор купли-продажи", "Составим за вас договор", 3000));
+            Deal deal = new Deal(1, 8000, 300, "Сделали все за вас");
+            deal.idServices.Add(1);
+            deal.idDisconts.Add(1);
+            dB.setDeal(deal);
             //проверить, открываются ли нужные таблицы
 
             //создать таблички и переменные
@@ -123,7 +134,7 @@ namespace Нотариус
                 if (!string.IsNullOrEmpty(idDisconts))
                     idDisconts = idDisconts.Substring(2);
 
-                dataGridViewDeal.Rows.Add(deal.id, deal.idClient, deal.Total, deal.Commission, deal.Description, idServices, idDisconts);
+                dataGridViewDeal.Rows.Add(deal.Id, deal.IdClient, deal.Total, deal.Commission, deal.Description, idServices, idDisconts);
             }
         }
 

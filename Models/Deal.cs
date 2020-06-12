@@ -6,55 +6,56 @@ namespace Нотариус
 {
 	public class Deal
 	{
-		public int id;
-		public int idClient;
+		public int Id;
+		public int IdClient;
 		//посчитать сумму и комиссионные
 		public double Total;
 		public double Commission;
 		public string Description;
 		public List<int> idServices;
-		//public Service[] services;
 		//убрать скидку на конкретную услугу
 		public List<int> idDisconts;
-		//public Discont[] disconts;
 
 		public Deal()
 		{
-			id = -1;
-			idClient = 0;
+			Id = -1;
+			IdClient = 0;
 			Total = 0;
 			Commission = 0;
 			Description = "";
+
 			idServices = new List<int>();
 			idDisconts = new List<int>();
 		}
 
-		public Deal(int id, int IdClient)
+		public Deal(int id, int idClient, double total, double commission, string description)
 		{
-			this.id = id;
-			idClient = IdClient;
-			Total = 0;
-			Commission = 0;
-			Description = "";
+			Id = id;
+			IdClient = idClient;
+			Total = total;
+			Commission = commission;
+			Description = description;
+
 			idServices = new List<int>();
 			idDisconts = new List<int>();
 		}
 
-		public Deal(int IdClient)
+		public Deal(int idClient, double total, double commission, string description)
 		{
-			id = -1;
-			idClient = IdClient;
-			Total = 0;
-			Commission = 0;
-			Description = "";
+			Id = -1;
+			IdClient = idClient;
+			Total = total;
+			Commission = commission;
+			Description = description;
+
 			idServices = new List<int>();
 			idDisconts = new List<int>();
 		}
 
 		public Deal(DbDataRecord record)
 		{
-			id = Convert.ToInt32(record["id"].ToString());
-			idClient = Convert.ToInt32(record["idClient"].ToString());
+			Id = Convert.ToInt32(record["id"].ToString());
+			IdClient = Convert.ToInt32(record["idClient"].ToString());
 			Total = Convert.ToDouble(record["Total"].ToString());
 			Commission = Convert.ToDouble(record["Commission"].ToString());
 			Description = record["Description"].ToString();
@@ -63,10 +64,41 @@ namespace Нотариус
 			idDisconts = new List<int>();
 		}
 
+		#region SQLDeal
+		public static string SQLSelectId()
+		{
+			return string.Format(
+				"SELECT {0} FROM '{1}';",
+				"id",
+				"Deals"
+				);
+		}
+
+		public static string SQLSelect(int id)
+		{
+			return string.Format(
+				"SELECT {0} FROM '{1}' WHERE {2}={3};",
+				"*",
+				"Deals",
+				"id",
+				id
+				);
+		}
+
+		public static string SQLDelete(int id)
+		{
+			return string.Format(
+				"DELETE FROM '{0}' WHERE {1}={2};",
+				"Deals",
+				"id",
+				id
+				);
+		}
+
 		public string SQLInsertOrUpdate()
 		{
 			string names = "idClient";
-			string values = "'" + idClient + "'";
+			string values = "'" + IdClient + "'";
 
 			if (Total != 0)
 			{
@@ -87,7 +119,7 @@ namespace Нотариус
 			}
 
 			string query = "";
-			if (id == -1)
+			if (Id == -1)
 			{
 				query = string.Format(
 					"INSERT INTO {0} ({1}) VALUES ({2});",
@@ -104,40 +136,10 @@ namespace Нотариус
 					names,
 					values,
 					"id",
-					id
+					Id
 					);
 			}
 			return query;
-		}
-
-		public static string SQLSelect(int id)
-		{
-			return string.Format(
-				"SELECT {0} FROM '{1}' WHERE {2}={3};",
-				"*",
-				"Deals",
-				"id",
-				id
-				);
-		}
-
-		public static string SQLSelectId()
-		{
-			return string.Format(
-				"SELECT {0} FROM '{1}';",
-				"id",
-				"Deals"
-				);
-		}
-
-		public static string SQLDelete(int id)
-		{
-			return string.Format(
-				"DELETE FROM '{0}' WHERE {1}={2};",
-				"Deals",
-				"id",
-				id
-				);
 		}
 
 		public string SQLDelete()
@@ -146,7 +148,32 @@ namespace Нотариус
 				"DELETE FROM '{0}' WHERE {1}={2};",
 				"Deals",
 				"id",
-				id
+				Id
+				);
+		}
+		#endregion
+
+		#region SQLDealService
+		public static string SQLServiceDelete(int id, int idService)
+		{
+			return string.Format(
+				"DELETE FROM '{0}' WHERE ({1}, {2}) = ({3}, {4});",
+				"Deal_Services",
+				"idDeal",
+				"idService",
+				id,
+				idService
+				);
+		}
+
+		public string SQLServiceSelect()
+		{
+			return string.Format(
+				"SELECT {0} FROM '{1}' WHERE {2}={3};",
+				"*",
+				"Deal_Services",
+				"idDeal",
+				Id
 				);
 		}
 
@@ -157,7 +184,7 @@ namespace Нотариус
 
 			foreach (int idService in idServices)
 			{
-				values += ",(" + id + "," + idService + ")";
+				values += ",(" + Id + "," + idService + ")";
 			}
 
 			values = values.Remove(0, 1);
@@ -175,29 +202,6 @@ namespace Нотариус
 			return query;
 		}
 
-		public string SQLServiceSelect()
-		{
-			return string.Format(
-				"SELECT {0} FROM '{1}' WHERE {2}={3};",
-				"*",
-				"Deal_Services",
-				"idDeal",
-				id
-				);
-		}
-
-		public static string SQLServiceDelete(int id, int idService)
-		{
-			return string.Format(
-				"DELETE FROM '{0}' WHERE ({1}, {2}) = ({3}, {4});",
-				"Deal_Services",
-				"idDeal",
-				"idService",
-				id,
-				idService
-				);
-		}
-
 		public string SQLServiceDelete(int idService)
 		{
 			return string.Format(
@@ -205,7 +209,7 @@ namespace Нотариус
 				"Deal_Services",
 				"idDeal",
 				"idService",
-				id,
+				Id,
 				idService
 				);
 		}
@@ -216,7 +220,32 @@ namespace Нотариус
 				"DELETE FROM '{0}' WHERE {1} = {2};",
 				"Deal_Services",
 				"idDeal",
-				id
+				Id
+				);
+		}
+		#endregion
+
+		#region SQLDealDiscont
+		public static string SQLDiscontDelete(int id, int idDiscont)
+		{
+			return string.Format(
+				"DELETE FROM '{0}' WHERE ({1}, {2}) = ({3}, {4});",
+				"Deal_Disconts",
+				"idDeal",
+				"idDiscont",
+				id,
+				idDiscont
+				);
+		}
+
+		public string SQLDiscontSelect()
+		{
+			return string.Format(
+				"SELECT {0} FROM '{1}' WHERE {2}={3};",
+				"*",
+				"Deal_Disconts",
+				"idDeal",
+				Id
 				);
 		}
 
@@ -227,7 +256,7 @@ namespace Нотариус
 
 			foreach(int idDiscont in idDisconts)
 			{
-				values += ",(" + id + "," + idDiscont + ")";
+				values += ",(" + Id + "," + idDiscont + ")";
 			}
 
 			values = values.Remove(0, 1);
@@ -245,29 +274,6 @@ namespace Нотариус
 			return query;
 		}
 
-		public string SQLDiscontSelect()
-		{
-			return string.Format(
-				"SELECT {0} FROM '{1}' WHERE {2}={3};",
-				"*",
-				"Deal_Disconts",
-				"idDeal",
-				id
-				);
-		}
-
-		public static string SQLDiscontDelete(int id, int idDiscont)
-		{
-			return string.Format(
-				"DELETE FROM '{0}' WHERE ({1}, {2}) = ({3}, {4});",
-				"Deal_Disconts",
-				"idDeal",
-				"idDiscont",
-				id,
-				idDiscont
-				);
-		}
-
 		public string SQLDiscontDelete(int idDiscont)
 		{
 			return string.Format(
@@ -275,7 +281,7 @@ namespace Нотариус
 				"Deal_Disconts",
 				"idDeal",
 				"idDiscont",
-				id,
+				Id,
 				idDiscont
 				);
 		}
@@ -286,8 +292,9 @@ namespace Нотариус
 				"DELETE FROM '{0}' WHERE {1} = {2};",
 				"Deal_Disconts",
 				"idDeal",
-				id
+				Id
 				);
 		}
-	}
+        #endregion
+    }
 }

@@ -10,6 +10,7 @@ namespace Нотариус
 		public string Description;
 		public double Price;
 
+
 		public Service()
 		{
 			id = -1;
@@ -18,20 +19,20 @@ namespace Нотариус
 			Price = 0;
 		}
 
-		public Service(int id, string name)
+		public Service(int id, string name, string description, double price)
 		{
 			this.id = id;
 			Name = name;
-			Description = "";
-			Price = 0;
+			Description = description;
+			Price = price;
 		}
 
-		public Service(string name)
+		public Service(string name, string description, double price)
 		{
 			id = -1;
 			Name = name;
-			Description = "";
-			Price = 0;
+			Description = description;
+			Price = price;
 		}
 
 		public Service(DbDataRecord record)
@@ -40,6 +41,36 @@ namespace Нотариус
 			Name = record["Name"].ToString();
 			Description = record["Description"].ToString();
 			Price = Convert.ToInt32(record["Price"].ToString());
+		}
+
+		public static string SQLSelectId()
+		{
+			return string.Format(
+				"SELECT {0} FROM '{1}';",
+				"id",
+				"Services"
+				);
+		}
+
+		public static string SQLSelect(int id)
+		{
+			return string.Format(
+				"SELECT {0} FROM '{1}' WHERE {2}={3};",
+				"*",
+				"Services",
+				"id",
+				id
+				);
+		}
+
+		public static string SQLDelete(int id)
+		{
+			return string.Format(
+				"DELETE FROM '{0}' WHERE {1}={2};",
+				"Services",
+				"id",
+				id
+				);
 		}
 
 		public string SQLInsertOrUpdate()
@@ -81,36 +112,6 @@ namespace Нотариус
 					);
 			}
 			return query;
-		}
-
-		public static string SQLSelect(int id)
-		{
-			return string.Format(
-				"SELECT {0} FROM '{1}' WHERE {2}={3};",
-				"*",
-				"Services",
-				"id",
-				id
-				);
-		}
-
-		public static string SQLSelectId()
-		{
-			return string.Format(
-				"SELECT {0} FROM '{1}';",
-				"id",
-				"Services"
-				);
-		}
-
-		public static string SQLDelete(int id)
-		{
-			return string.Format(
-				"DELETE FROM '{0}' WHERE {1}={2};",
-				"Services",
-				"id",
-				id
-				);
 		}
 
 		public string SQLDelete()
