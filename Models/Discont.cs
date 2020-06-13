@@ -9,7 +9,6 @@ namespace Нотариус
 		public string Name;
 		public string Description;
 		public double Percent;
-		public double Value;
 
 		public Discont()
 		{
@@ -17,25 +16,22 @@ namespace Нотариус
 			Name = "";
 			Description = "";
 			Percent = 0;
-			Value = 0;
 		}
 
-		public Discont(int id, string name, string description, double percent, double value)
+		public Discont(int id, string name, string description, double percent)
 		{
 			this.id = id;
 			Name = name;
 			Description = description;
 			Percent = percent;
-			Value = value;
 		}
 
-		public Discont(string name, string description, double percent, double value)
+		public Discont(string name, string description, double percent)
 		{
 			id = -1;
 			Name = name;
 			Description = description;
 			Percent = percent;
-			Value = value;
 		}
 
 		public Discont(DbDataRecord record)
@@ -44,7 +40,6 @@ namespace Нотариус
 			Name = record["Name"].ToString();
 			Description = record["Description"].ToString();
 			Percent = string.IsNullOrEmpty(record["Percent"].ToString()) ? 0 : Convert.ToDouble(record["Percent"].ToString());
-			Value = string.IsNullOrEmpty(record["Value"].ToString()) ? 0 : Convert.ToDouble(record["Value"].ToString());
 		}
 
 		public static string SQLSelectId()
@@ -92,11 +87,6 @@ namespace Нотариус
 			{
 				names += ", " + "Percent";
 				values += ", '" + Percent + "'";
-			}
-			else
-			{
-				names += ", " + "Value";
-				values += ", '" + Value + "'";
 			}
 
 			string query = "";

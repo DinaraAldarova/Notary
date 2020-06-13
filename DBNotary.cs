@@ -27,38 +27,33 @@ namespace Нотариус
 				'id'	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 				'idDeal'	INTEGER NOT NULL,
 				'idService'	INTEGER NOT NULL,
-				'idDiscont'	INTEGER,
 				FOREIGN KEY('idDeal') REFERENCES 'Deals'('id'),
-				FOREIGN KEY('idService') REFERENCES 'Services'('id'),
-				FOREIGN KEY('idDiscont') REFERENCES 'Disconts'('id')
+				FOREIGN KEY('idService') REFERENCES 'Services'('id')
 			);",
 			@"CREATE TABLE IF NOT EXISTS 'Disconts' (
 				'id'	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-				'Name'	TEXT NOT NULL UNIQUE,
-				'Description'	TEXT,
-				'Percent'	REAL,
-				'Value'	REAL
+				'Name'	TEXT NOT NULL,
+				'Description'	TEXT NOT NULL,
+				'Percent'	REAL NOT NULL
 			);",
 			@"CREATE TABLE IF NOT EXISTS 'Deals' (
 				'id'	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 				'idClient'	INTEGER NOT NULL,
-				'Total'	REAL,
-				'Commission'	REAL,
-				'Description'	TEXT,
+				'Description'	TEXT NOT NULL,
 				FOREIGN KEY('idClient') REFERENCES 'Clients'('id')
 			);",
 			@"CREATE TABLE IF NOT EXISTS 'Services' (
 				'id'	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-				'Name'	TEXT NOT NULL UNIQUE,
-				'Description'	TEXT,
+				'Name'	TEXT NOT NULL,
+				'Description'	TEXT NOT NULL,
 				'Price'	REAL NOT NULL
 			);",
 			@"CREATE TABLE IF NOT EXISTS 'Clients' (
 				'id'	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 				'Name'	TEXT NOT NULL,
-				'Activity'	TEXT,
-				'Address'	TEXT,
-				'Phone'	TEXT
+				'Activity'	TEXT NOT NULL,
+				'Address'	TEXT NOT NULL,
+				'Phone'	TEXT NOT NULL
 			);",
 			@"COMMIT;"
 			};
@@ -193,6 +188,13 @@ namespace Нотариус
 
 			SQLiteCommand command = new SQLiteCommand(deal.SQLInsertOrUpdate(), connection);
 			int result = command.ExecuteNonQuery();
+			
+			if (deal.id == -1)
+			{
+				connection.Close();
+				deal.id = getDealId().Max();
+				connection.Open();
+			}
 
 			command = new SQLiteCommand(deal.SQLDiscontDeleteAll(), connection);
 			command.ExecuteNonQuery();

@@ -6,11 +6,14 @@ namespace Нотариус
 {
 	public class Deal
 	{
-		public int Id;
-		public int IdClient;
+		public const int ComissionPercent = 5;
+
+		public int id;
+		public int idClient;
 		//посчитать сумму и комиссионные
-		public double Total;
-		public double Commission;
+		public double Total = 0;
+		public double DiscontPercent = 0;
+		public double Commission = 0;
 		public string Description;
 		public List<int> idServices;
 		//убрать скидку на конкретную услугу
@@ -18,34 +21,28 @@ namespace Нотариус
 
 		public Deal()
 		{
-			Id = -1;
-			IdClient = 0;
-			Total = 0;
-			Commission = 0;
+			id = -1;
+			idClient = 0;
 			Description = "";
 
 			idServices = new List<int>();
 			idDisconts = new List<int>();
 		}
 
-		public Deal(int id, int idClient, double total, double commission, string description)
+		public Deal(int id, int idClient, string description)
 		{
-			Id = id;
-			IdClient = idClient;
-			Total = total;
-			Commission = commission;
+			this.id = id;
+			this.idClient = idClient;
 			Description = description;
 
 			idServices = new List<int>();
 			idDisconts = new List<int>();
 		}
 
-		public Deal(int idClient, double total, double commission, string description)
+		public Deal(int idClient, string description)
 		{
-			Id = -1;
-			IdClient = idClient;
-			Total = total;
-			Commission = commission;
+			id = -1;
+			this.idClient = idClient;
 			Description = description;
 
 			idServices = new List<int>();
@@ -54,14 +51,22 @@ namespace Нотариус
 
 		public Deal(DbDataRecord record)
 		{
-			Id = Convert.ToInt32(record["id"].ToString());
-			IdClient = Convert.ToInt32(record["idClient"].ToString());
-			Total = Convert.ToDouble(record["Total"].ToString());
-			Commission = Convert.ToDouble(record["Commission"].ToString());
+			id = Convert.ToInt32(record["id"].ToString());
+			idClient = Convert.ToInt32(record["idClient"].ToString());
 			Description = record["Description"].ToString();
 
 			idServices = new List<int>();
 			idDisconts = new List<int>();
+		}
+
+		public void AddService(int idService)
+		{
+			idServices.Add(idService);
+		}
+
+		public void AddDiscont(int idDiscont)
+		{
+			idDisconts.Add(idDiscont);
 		}
 
 		#region SQLDeal
@@ -98,19 +103,7 @@ namespace Нотариус
 		public string SQLInsertOrUpdate()
 		{
 			string names = "idClient";
-			string values = "'" + IdClient + "'";
-
-			if (Total != 0)
-			{
-				names += ", " + "Total";
-				values += ", '" + Total + "'";
-			}
-
-			if (Commission != 0)
-			{
-				names += ", " + "Commission";
-				values += ", '" + Commission + "'";
-			}
+			string values = "'" + idClient + "'";
 
 			if (Description != "")
 			{
@@ -119,7 +112,7 @@ namespace Нотариус
 			}
 
 			string query = "";
-			if (Id == -1)
+			if (id == -1)
 			{
 				query = string.Format(
 					"INSERT INTO {0} ({1}) VALUES ({2});",
@@ -136,7 +129,7 @@ namespace Нотариус
 					names,
 					values,
 					"id",
-					Id
+					id
 					);
 			}
 			return query;
@@ -148,7 +141,7 @@ namespace Нотариус
 				"DELETE FROM '{0}' WHERE {1}={2};",
 				"Deals",
 				"id",
-				Id
+				id
 				);
 		}
 		#endregion
@@ -173,7 +166,7 @@ namespace Нотариус
 				"*",
 				"Deal_Services",
 				"idDeal",
-				Id
+				id
 				);
 		}
 
@@ -184,7 +177,7 @@ namespace Нотариус
 
 			foreach (int idService in idServices)
 			{
-				values += ",(" + Id + "," + idService + ")";
+				values += ",(" + id + "," + idService + ")";
 			}
 
 			values = values.Remove(0, 1);
@@ -209,7 +202,7 @@ namespace Нотариус
 				"Deal_Services",
 				"idDeal",
 				"idService",
-				Id,
+				id,
 				idService
 				);
 		}
@@ -220,7 +213,7 @@ namespace Нотариус
 				"DELETE FROM '{0}' WHERE {1} = {2};",
 				"Deal_Services",
 				"idDeal",
-				Id
+				id
 				);
 		}
 		#endregion
@@ -245,20 +238,23 @@ namespace Нотариус
 				"*",
 				"Deal_Disconts",
 				"idDeal",
-				Id
+				id
 				);
 		}
 
 		public string SQLDiscontInsert()
 		{
+			if (idDisconts.Count == 0)
+				return "";
+
 			string names = "idDeal, idDiscont";
 			string values = "";
 
 			foreach(int idDiscont in idDisconts)
 			{
-				values += ",(" + Id + "," + idDiscont + ")";
+				values += ",(" + id + "," + idDiscont + ")";
 			}
-
+			
 			values = values.Remove(0, 1);
 
 			string query = "";
@@ -281,7 +277,7 @@ namespace Нотариус
 				"Deal_Disconts",
 				"idDeal",
 				"idDiscont",
-				Id,
+				id,
 				idDiscont
 				);
 		}
@@ -292,7 +288,7 @@ namespace Нотариус
 				"DELETE FROM '{0}' WHERE {1} = {2};",
 				"Deal_Disconts",
 				"idDeal",
-				Id
+				id
 				);
 		}
         #endregion

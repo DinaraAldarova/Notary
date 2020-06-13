@@ -34,6 +34,7 @@
             this.groupBoxClientId = new System.Windows.Forms.GroupBox();
             this.buttonClientEdit = new System.Windows.Forms.Button();
             this.buttonClientDelete = new System.Windows.Forms.Button();
+            this.labelClient = new System.Windows.Forms.Label();
             this.groupBoxClientSelect = new System.Windows.Forms.GroupBox();
             this.labelClientSelect = new System.Windows.Forms.Label();
             this.buttonClientCreate = new System.Windows.Forms.Button();
@@ -42,8 +43,10 @@
             this.tabPageDeal = new System.Windows.Forms.TabPage();
             this.splitContainerDeal = new System.Windows.Forms.SplitContainer();
             this.groupBoxDealId = new System.Windows.Forms.GroupBox();
+            this.buttonDealReport = new System.Windows.Forms.Button();
             this.buttonDealEdit = new System.Windows.Forms.Button();
             this.buttonDealDelete = new System.Windows.Forms.Button();
+            this.labelDeal = new System.Windows.Forms.Label();
             this.groupBoxDealSelect = new System.Windows.Forms.GroupBox();
             this.labelDealSelect = new System.Windows.Forms.Label();
             this.buttonDealCreate = new System.Windows.Forms.Button();
@@ -52,8 +55,9 @@
             this.tabPageService = new System.Windows.Forms.TabPage();
             this.splitContainerService = new System.Windows.Forms.SplitContainer();
             this.groupBoxServiceId = new System.Windows.Forms.GroupBox();
-            this.buttonServiceEdit = new System.Windows.Forms.Button();
             this.buttonServiceDelete = new System.Windows.Forms.Button();
+            this.buttonServiceEdit = new System.Windows.Forms.Button();
+            this.labelService = new System.Windows.Forms.Label();
             this.groupBoxServiceSelect = new System.Windows.Forms.GroupBox();
             this.labelServiceSelect = new System.Windows.Forms.Label();
             this.buttonServiceCreate = new System.Windows.Forms.Button();
@@ -64,11 +68,13 @@
             this.groupBoxDiscontId = new System.Windows.Forms.GroupBox();
             this.buttonDiscontEdit = new System.Windows.Forms.Button();
             this.buttonDiscontDelete = new System.Windows.Forms.Button();
+            this.labelDiscont = new System.Windows.Forms.Label();
             this.groupBoxDiscontSelect = new System.Windows.Forms.GroupBox();
             this.labelDiscontSelect = new System.Windows.Forms.Label();
             this.buttonDiscontCreate = new System.Windows.Forms.Button();
             this.comboBoxDiscont = new System.Windows.Forms.ComboBox();
             this.dataGridViewDiscont = new System.Windows.Forms.DataGridView();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.tabControlWindow.SuspendLayout();
             this.tabPageClient.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerClient)).BeginInit();
@@ -151,6 +157,7 @@
             // 
             this.groupBoxClientId.Controls.Add(this.buttonClientEdit);
             this.groupBoxClientId.Controls.Add(this.buttonClientDelete);
+            this.groupBoxClientId.Controls.Add(this.labelClient);
             this.groupBoxClientId.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxClientId.Location = new System.Drawing.Point(0, 59);
             this.groupBoxClientId.Name = "groupBoxClientId";
@@ -168,6 +175,7 @@
             this.buttonClientEdit.TabIndex = 1;
             this.buttonClientEdit.Text = "Редактировать";
             this.buttonClientEdit.UseVisualStyleBackColor = true;
+            this.buttonClientEdit.Click += new System.EventHandler(this.buttonClientEdit_Click);
             // 
             // buttonClientDelete
             // 
@@ -178,6 +186,16 @@
             this.buttonClientDelete.TabIndex = 0;
             this.buttonClientDelete.Text = "Удалить";
             this.buttonClientDelete.UseVisualStyleBackColor = true;
+            this.buttonClientDelete.Click += new System.EventHandler(this.buttonClientDelete_Click);
+            // 
+            // labelClient
+            // 
+            this.labelClient.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelClient.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelClient.Location = new System.Drawing.Point(3, 16);
+            this.labelClient.Name = "labelClient";
+            this.labelClient.Size = new System.Drawing.Size(780, 153);
+            this.labelClient.TabIndex = 4;
             // 
             // groupBoxClientSelect
             // 
@@ -211,6 +229,7 @@
             this.buttonClientCreate.TabIndex = 1;
             this.buttonClientCreate.Text = "Создать";
             this.buttonClientCreate.UseVisualStyleBackColor = true;
+            this.buttonClientCreate.Click += new System.EventHandler(this.buttonClientCreate_Click);
             // 
             // comboBoxClient
             // 
@@ -220,6 +239,7 @@
             this.comboBoxClient.Name = "comboBoxClient";
             this.comboBoxClient.Size = new System.Drawing.Size(121, 21);
             this.comboBoxClient.TabIndex = 0;
+            this.comboBoxClient.SelectedIndexChanged += new System.EventHandler(this.comboBoxClient_SelectedIndexChanged);
             // 
             // dataGridViewClient
             // 
@@ -267,8 +287,10 @@
             // 
             // groupBoxDealId
             // 
+            this.groupBoxDealId.Controls.Add(this.buttonDealReport);
             this.groupBoxDealId.Controls.Add(this.buttonDealEdit);
             this.groupBoxDealId.Controls.Add(this.buttonDealDelete);
+            this.groupBoxDealId.Controls.Add(this.labelDeal);
             this.groupBoxDealId.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxDealId.Location = new System.Drawing.Point(0, 59);
             this.groupBoxDealId.Name = "groupBoxDealId";
@@ -276,6 +298,17 @@
             this.groupBoxDealId.TabIndex = 3;
             this.groupBoxDealId.TabStop = false;
             this.groupBoxDealId.Text = "Сделка";
+            // 
+            // buttonDealReport
+            // 
+            this.buttonDealReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonDealReport.Location = new System.Drawing.Point(476, 143);
+            this.buttonDealReport.Name = "buttonDealReport";
+            this.buttonDealReport.Size = new System.Drawing.Size(125, 23);
+            this.buttonDealReport.TabIndex = 5;
+            this.buttonDealReport.Text = "Сформировать отчет";
+            this.buttonDealReport.UseVisualStyleBackColor = true;
+            this.buttonDealReport.Click += new System.EventHandler(this.buttonDealReport_Click);
             // 
             // buttonDealEdit
             // 
@@ -286,6 +319,7 @@
             this.buttonDealEdit.TabIndex = 1;
             this.buttonDealEdit.Text = "Редактировать";
             this.buttonDealEdit.UseVisualStyleBackColor = true;
+            this.buttonDealEdit.Click += new System.EventHandler(this.buttonDealEdit_Click);
             // 
             // buttonDealDelete
             // 
@@ -296,6 +330,16 @@
             this.buttonDealDelete.TabIndex = 0;
             this.buttonDealDelete.Text = "Удалить";
             this.buttonDealDelete.UseVisualStyleBackColor = true;
+            this.buttonDealDelete.Click += new System.EventHandler(this.buttonDealDelete_Click);
+            // 
+            // labelDeal
+            // 
+            this.labelDeal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelDeal.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDeal.Location = new System.Drawing.Point(3, 16);
+            this.labelDeal.Name = "labelDeal";
+            this.labelDeal.Size = new System.Drawing.Size(780, 153);
+            this.labelDeal.TabIndex = 4;
             // 
             // groupBoxDealSelect
             // 
@@ -329,6 +373,7 @@
             this.buttonDealCreate.TabIndex = 1;
             this.buttonDealCreate.Text = "Создать";
             this.buttonDealCreate.UseVisualStyleBackColor = true;
+            this.buttonDealCreate.Click += new System.EventHandler(this.buttonDealCreate_Click);
             // 
             // comboBoxDeal
             // 
@@ -338,6 +383,7 @@
             this.comboBoxDeal.Name = "comboBoxDeal";
             this.comboBoxDeal.Size = new System.Drawing.Size(121, 21);
             this.comboBoxDeal.TabIndex = 0;
+            this.comboBoxDeal.SelectedIndexChanged += new System.EventHandler(this.comboBoxDeal_SelectedIndexChanged);
             // 
             // dataGridViewDeal
             // 
@@ -385,8 +431,9 @@
             // 
             // groupBoxServiceId
             // 
-            this.groupBoxServiceId.Controls.Add(this.buttonServiceEdit);
             this.groupBoxServiceId.Controls.Add(this.buttonServiceDelete);
+            this.groupBoxServiceId.Controls.Add(this.buttonServiceEdit);
+            this.groupBoxServiceId.Controls.Add(this.labelService);
             this.groupBoxServiceId.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxServiceId.Location = new System.Drawing.Point(0, 59);
             this.groupBoxServiceId.Name = "groupBoxServiceId";
@@ -394,16 +441,6 @@
             this.groupBoxServiceId.TabIndex = 3;
             this.groupBoxServiceId.TabStop = false;
             this.groupBoxServiceId.Text = "Услуга";
-            // 
-            // buttonServiceEdit
-            // 
-            this.buttonServiceEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonServiceEdit.Location = new System.Drawing.Point(607, 143);
-            this.buttonServiceEdit.Name = "buttonServiceEdit";
-            this.buttonServiceEdit.Size = new System.Drawing.Size(92, 23);
-            this.buttonServiceEdit.TabIndex = 1;
-            this.buttonServiceEdit.Text = "Редактировать";
-            this.buttonServiceEdit.UseVisualStyleBackColor = true;
             // 
             // buttonServiceDelete
             // 
@@ -414,6 +451,27 @@
             this.buttonServiceDelete.TabIndex = 0;
             this.buttonServiceDelete.Text = "Удалить";
             this.buttonServiceDelete.UseVisualStyleBackColor = true;
+            this.buttonServiceDelete.Click += new System.EventHandler(this.buttonServiceDelete_Click);
+            // 
+            // buttonServiceEdit
+            // 
+            this.buttonServiceEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonServiceEdit.Location = new System.Drawing.Point(607, 143);
+            this.buttonServiceEdit.Name = "buttonServiceEdit";
+            this.buttonServiceEdit.Size = new System.Drawing.Size(92, 23);
+            this.buttonServiceEdit.TabIndex = 1;
+            this.buttonServiceEdit.Text = "Редактировать";
+            this.buttonServiceEdit.UseVisualStyleBackColor = true;
+            this.buttonServiceEdit.Click += new System.EventHandler(this.buttonServiceEdit_Click);
+            // 
+            // labelService
+            // 
+            this.labelService.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelService.Font = new System.Drawing.Font("Lucida Console", 8.25F);
+            this.labelService.Location = new System.Drawing.Point(3, 16);
+            this.labelService.Name = "labelService";
+            this.labelService.Size = new System.Drawing.Size(780, 153);
+            this.labelService.TabIndex = 3;
             // 
             // groupBoxServiceSelect
             // 
@@ -447,6 +505,7 @@
             this.buttonServiceCreate.TabIndex = 1;
             this.buttonServiceCreate.Text = "Создать";
             this.buttonServiceCreate.UseVisualStyleBackColor = true;
+            this.buttonServiceCreate.Click += new System.EventHandler(this.buttonServiceCreate_Click);
             // 
             // comboBoxService
             // 
@@ -456,6 +515,7 @@
             this.comboBoxService.Name = "comboBoxService";
             this.comboBoxService.Size = new System.Drawing.Size(121, 21);
             this.comboBoxService.TabIndex = 0;
+            this.comboBoxService.SelectedIndexChanged += new System.EventHandler(this.comboBoxService_SelectedIndexChanged);
             // 
             // dataGridViewService
             // 
@@ -505,6 +565,7 @@
             // 
             this.groupBoxDiscontId.Controls.Add(this.buttonDiscontEdit);
             this.groupBoxDiscontId.Controls.Add(this.buttonDiscontDelete);
+            this.groupBoxDiscontId.Controls.Add(this.labelDiscont);
             this.groupBoxDiscontId.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxDiscontId.Location = new System.Drawing.Point(0, 59);
             this.groupBoxDiscontId.Name = "groupBoxDiscontId";
@@ -522,6 +583,7 @@
             this.buttonDiscontEdit.TabIndex = 1;
             this.buttonDiscontEdit.Text = "Редактировать";
             this.buttonDiscontEdit.UseVisualStyleBackColor = true;
+            this.buttonDiscontEdit.Click += new System.EventHandler(this.buttonDiscontEdit_Click);
             // 
             // buttonDiscontDelete
             // 
@@ -532,6 +594,16 @@
             this.buttonDiscontDelete.TabIndex = 0;
             this.buttonDiscontDelete.Text = "Удалить";
             this.buttonDiscontDelete.UseVisualStyleBackColor = true;
+            this.buttonDiscontDelete.Click += new System.EventHandler(this.buttonDiscontDelete_Click);
+            // 
+            // labelDiscont
+            // 
+            this.labelDiscont.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelDiscont.Font = new System.Drawing.Font("Lucida Console", 8.25F);
+            this.labelDiscont.Location = new System.Drawing.Point(3, 16);
+            this.labelDiscont.Name = "labelDiscont";
+            this.labelDiscont.Size = new System.Drawing.Size(780, 153);
+            this.labelDiscont.TabIndex = 4;
             // 
             // groupBoxDiscontSelect
             // 
@@ -565,6 +637,7 @@
             this.buttonDiscontCreate.TabIndex = 1;
             this.buttonDiscontCreate.Text = "Создать";
             this.buttonDiscontCreate.UseVisualStyleBackColor = true;
+            this.buttonDiscontCreate.Click += new System.EventHandler(this.buttonDiscontCreate_Click);
             // 
             // comboBoxDiscont
             // 
@@ -574,6 +647,7 @@
             this.comboBoxDiscont.Name = "comboBoxDiscont";
             this.comboBoxDiscont.Size = new System.Drawing.Size(121, 21);
             this.comboBoxDiscont.TabIndex = 0;
+            this.comboBoxDiscont.SelectedIndexChanged += new System.EventHandler(this.comboBoxDiscont_SelectedIndexChanged);
             // 
             // dataGridViewDiscont
             // 
@@ -682,6 +756,12 @@
         private System.Windows.Forms.Button buttonDiscontCreate;
         private System.Windows.Forms.ComboBox comboBoxDiscont;
         private System.Windows.Forms.DataGridView dataGridViewDiscont;
+        private System.Windows.Forms.Label labelService;
+        private System.Windows.Forms.Label labelClient;
+        private System.Windows.Forms.Label labelDeal;
+        private System.Windows.Forms.Label labelDiscont;
+        private System.Windows.Forms.Button buttonDealReport;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }
 
