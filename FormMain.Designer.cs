@@ -254,6 +254,7 @@
             this.dataGridViewClient.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewClient.Size = new System.Drawing.Size(786, 183);
             this.dataGridViewClient.TabIndex = 1;
+            this.dataGridViewClient.SelectionChanged += new System.EventHandler(this.dataGridViewClient_SelectionChanged);
             // 
             // tabPageDeal
             // 
@@ -398,6 +399,7 @@
             this.dataGridViewDeal.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewDeal.Size = new System.Drawing.Size(786, 183);
             this.dataGridViewDeal.TabIndex = 1;
+            this.dataGridViewDeal.SelectionChanged += new System.EventHandler(this.dataGridViewDeal_SelectionChanged);
             // 
             // tabPageService
             // 
@@ -530,6 +532,7 @@
             this.dataGridViewService.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewService.Size = new System.Drawing.Size(786, 183);
             this.dataGridViewService.TabIndex = 1;
+            this.dataGridViewService.SelectionChanged += new System.EventHandler(this.dataGridViewService_SelectionChanged);
             // 
             // tabPageDiscont
             // 
@@ -662,6 +665,7 @@
             this.dataGridViewDiscont.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewDiscont.Size = new System.Drawing.Size(786, 183);
             this.dataGridViewDiscont.TabIndex = 1;
+            this.dataGridViewDiscont.SelectionChanged += new System.EventHandler(this.dataGridViewDiscont_SelectionChanged);
             // 
             // FormMain
             // 

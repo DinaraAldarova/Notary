@@ -47,6 +47,7 @@ namespace Нотариус
             this.disconts = disconts;
             this.Text = "Создание сделки";
             buttonSave.Text = "Создать";
+            labelReport.Text = Report();
         }
 
         public FormDeal(Deal deal, List<Client> clients, List<Service> services, List<Discont> disconts)
@@ -85,6 +86,7 @@ namespace Нотариус
             this.disconts = disconts;
             this.Text = "Сделка №" + deal.id;
             buttonSave.Text = "Изменить";
+            labelReport.Text = Report();
         }
 
         private void FormDeal_FormClosing(object sender, FormClosingEventArgs e)
@@ -124,6 +126,42 @@ namespace Нотариус
                     }
                 }
             }
+        }
+
+        private string Report()
+        {
+            string text = "Список услуг\n";
+            deal.Total = 0;
+            foreach (Service service in services.FindAll(x => checkedListBoxService.CheckedItems.Contains(x.id + " " + x.Name)))
+            {
+                deal.Total += service.Price;
+                text += String.Format("{0, -80} - {1, 10:f2}₽\n", service.Name, service.Price);
+            }
+            text += String.Format("{0, 80}   {1, 10:f2}₽\n\n", "Итого", deal.Total);
+
+            text += "Список скидок\n";
+            deal.DiscontPercent = 0;
+            foreach (Discont discont in disconts.FindAll(x => checkedListBoxDiscont.CheckedItems.Contains(x.id + " " + x.Name)))
+            {
+                deal.DiscontPercent += discont.Percent;
+                text += String.Format("{0, -80} - {1, 10:f2}%\n", discont.Name, discont.Percent);
+            }
+            text += String.Format("{0, 80}   {1, 10:f2}%\n\n", "Скидка", deal.DiscontPercent);
+
+            deal.Commission = deal.Total / 100 * (100 - deal.DiscontPercent) / 100 * Deal.ComissionPercent;
+            text += String.Format("{0, 80}   {1, 10:f2}₽\n", "Комиссия", deal.Commission);
+            text += String.Format("{0, 80}   {1, 10:f2}₽", "К оплате", (deal.Total / 100 * deal.DiscontPercent + deal.Commission));
+            return text;
+        }
+
+        private void checkedListBoxService_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            labelReport.Text = Report();
+        }
+
+        private void checkedListBoxDiscont_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            labelReport.Text = Report();
         }
     }
 }
