@@ -349,51 +349,62 @@ namespace Нотариус
         private void comboBoxClient_SelectedIndexChanged(object sender, EventArgs e)
         {
             groupBoxClientId.Enabled = false;
-            int idClient = Convert.ToInt32(comboBoxClient.SelectedItem);
-            int index = clients.FindIndex(x => x.id == idClient);
-            string text = "Название организации: " + clients[index].Name + "\n\n" +
-                          "Вид деятельности: " + clients[index].Activity + "\n\n" +
-                          "Адрес: " + clients[index].Address + "\n\n" +
-                          "Телефон: " + clients[index].Phone;
-            labelClient.Text = text;
-            groupBoxClientId.Text = "Клиент №" + idClient;
-            groupBoxClientId.Enabled = true;
+            if (clients.Count > 0)
+            {
+                int idClient = Convert.ToInt32(comboBoxClient.SelectedItem);
+                int index = clients.FindIndex(x => x.id == idClient);
+                string text = "Название организации: " + clients[index].Name + "\n\n" +
+                              "Вид деятельности: " + clients[index].Activity + "\n\n" +
+                              "Адрес: " + clients[index].Address + "\n\n" +
+                              "Телефон: " + clients[index].Phone;
+                labelClient.Text = text;
+                groupBoxClientId.Text = "Клиент №" + idClient;
+                groupBoxClientId.Enabled = true;
+            }
         }
 
         private void comboBoxDeal_SelectedIndexChanged(object sender, EventArgs e)
         {
             groupBoxDealId.Enabled = false;
-            int idDeal = Convert.ToInt32(comboBoxDeal.SelectedItem);
-            
-            labelDeal.Text = DealReport(idDeal);
-            groupBoxDealId.Text = "Сделка №" + idDeal;
-            groupBoxDealId.Enabled = true;
+            if (deals.Count > 0)
+            {
+                int idDeal = Convert.ToInt32(comboBoxDeal.SelectedItem);
+                labelDeal.Text = DealReport(idDeal);
+                groupBoxDealId.Text = "Сделка №" + idDeal;
+                groupBoxDealId.Enabled = true;
+            }
         }
 
         private void comboBoxService_SelectedIndexChanged(object sender, EventArgs e)
         {
             groupBoxServiceId.Enabled = false;
-            int idService = Convert.ToInt32(comboBoxService.SelectedItem);
-            int index = services.FindIndex(x => x.id == idService);
-            string text = "Название услуги: "  + services[index].Name + "\n\n" +
-                          "Описание услуги: "  + services[index].Description + "\n\n" +
-                          "Стоимость услуги: " + services[index].Price + "₽";
-            labelService.Text = text;
-            groupBoxServiceId.Text = "Услуга №" + idService;
-            groupBoxServiceId.Enabled = true;
+            if (services.Count > 0)
+            {
+                int idService = Convert.ToInt32(comboBoxService.SelectedItem);
+                int index = services.FindIndex(x => x.id == idService);
+                string text = "Название услуги: " + services[index].Name + "\n\n" +
+                              "Описание услуги: " + services[index].Description + "\n\n" +
+                              "Стоимость услуги: " + services[index].Price + "₽";
+                labelService.Text = text;
+                groupBoxServiceId.Text = "Услуга №" + idService;
+                groupBoxServiceId.Enabled = true;
+            }
         }
 
         private void comboBoxDiscont_SelectedIndexChanged(object sender, EventArgs e)
         {
             groupBoxDiscontId.Enabled = false;
-            int idDiscont = Convert.ToInt32(comboBoxDiscont.SelectedItem);
-            int index = disconts.FindIndex(x => x.id == idDiscont);
-            string text = "Название скидки: " + disconts[index].Name + "\n\n" +
-                          "Описание скидки: " + disconts[index].Description + "\n\n" +
-                          "Размер скидки: "  + disconts[index].Percent + "%";
-            labelDiscont.Text = text;
-            groupBoxDiscontId.Text = "Скидка №" + idDiscont;
-            groupBoxDiscontId.Enabled = true;
+            if (disconts.Count > 0)
+            {
+                int idDiscont = Convert.ToInt32(comboBoxDiscont.SelectedItem);
+                int index = disconts.FindIndex(x => x.id == idDiscont);
+                string text = "Название скидки: " + disconts[index].Name + "\n\n" +
+                              "Описание скидки: " + disconts[index].Description + "\n\n" +
+                              "Размер скидки: " + disconts[index].Percent + "%";
+                labelDiscont.Text = text;
+                groupBoxDiscontId.Text = "Скидка №" + idDiscont;
+                groupBoxDiscontId.Enabled = true;
+            }
         }
 
         private string endingOfTheWord(string word, int number)

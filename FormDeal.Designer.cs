@@ -92,6 +92,7 @@
             // 
             this.comboBoxClientId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxClientId.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxClientId.FormattingEnabled = true;
             this.comboBoxClientId.Location = new System.Drawing.Point(15, 25);
             this.comboBoxClientId.Name = "comboBoxClientId";
