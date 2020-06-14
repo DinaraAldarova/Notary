@@ -651,22 +651,26 @@ namespace Нотариус
 
         private void dataGridViewClient_SelectionChanged(object sender, EventArgs e)
         {
-            comboBoxClient.SelectedItem = dataGridViewClient.SelectedRows[0].Cells["id"].Value;
+            if (dataGridViewClient.SelectedRows.Count > 0)
+                comboBoxClient.SelectedItem = dataGridViewClient.SelectedRows[0].Cells["id"].Value;
         }
 
         private void dataGridViewDeal_SelectionChanged(object sender, EventArgs e)
         {
-            comboBoxDeal.SelectedItem = dataGridViewDeal.SelectedRows[0].Cells["id"].Value;
+            if (dataGridViewDeal.SelectedRows.Count > 0)
+                comboBoxDeal.SelectedItem = dataGridViewDeal.SelectedRows[0].Cells["id"].Value;
         }
 
         private void dataGridViewService_SelectionChanged(object sender, EventArgs e)
         {
-            comboBoxService.SelectedItem = dataGridViewService.SelectedRows[0].Cells["id"].Value;
+            if (dataGridViewService.SelectedRows.Count > 0)
+                comboBoxService.SelectedItem = dataGridViewService.SelectedRows[0].Cells["id"].Value;
         }
 
         private void dataGridViewDiscont_SelectionChanged(object sender, EventArgs e)
         {
-            comboBoxDiscont.SelectedItem = dataGridViewDiscont.SelectedRows[0].Cells["id"].Value;
+            if (dataGridViewDiscont.SelectedRows.Count > 0)
+                comboBoxDiscont.SelectedItem = dataGridViewDiscont.SelectedRows[0].Cells["id"].Value;
         }
     }
 }
