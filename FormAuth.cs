@@ -12,8 +12,10 @@ namespace Нотариус
 {
     public partial class FormAuth : Form
     {
-        FormMain main;
-        Auth auth;
+        private FormMain main;
+        private Auth auth;
+        private int numberOfAttempts = 1;
+        private const int maxNumberOfAttempts = 3;
 
         public FormAuth(FormMain main)
         {
@@ -28,9 +30,18 @@ namespace Нотариус
             auth = new Auth(textBoxLogin.Text, textBoxPassword.Text);
             if (auth.userType == Auth.UserType.None)
             {
-                MessageBox.Show("Неверный логин или пароль");
-                textBoxPassword.Text = "";
-                textBoxPassword.Focus();
+                if (numberOfAttempts < maxNumberOfAttempts)
+                {
+                    MessageBox.Show("Неверный логин или пароль\nПожалуйста, повторите ввод");
+                    numberOfAttempts++;
+                    textBoxPassword.Text = "";
+                    textBoxPassword.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Неверный логин или пароль\nПревышено количество попыток ввода пароля. Приложение будет закрыто");
+                    Application.Exit();
+                }
             }
             else
             {
